@@ -4,6 +4,7 @@ import './helpers.dart';
 const String emptyListWarn = "list is empty";
 const String ambiguousListWarn = "list is ambiguous";
 const String ambiguousTypeWarn = "type is ambiguous";
+String collectionName = '';
 
 class Warning {
   final String warning;
@@ -326,10 +327,16 @@ class ClassDefinition {
   }
 
   String toString() {
+    var modelName = name + 'Model';
     if (privateFields) {
       return 'class $name extends DataItem {\n$_fieldList\n\n$_defaultPrivateConstructor\n\n$_gettersSetters\n\n$_jsonParseFunc\n\n$_jsonGenFunc\n}\n';
     } else {
-      return 'class $name extends DataItem {\n$_fieldList\n\n$_defaultConstructor\n\n$_jsonParseFunc\n\n$_jsonGenFunc\n}\n';
+      return "import 'package:controls_data/data_model.dart';\n\n" +
+          'class $name extends DataItem {\n$_fieldList\n\n$_defaultConstructor\n\n$_jsonParseFunc\n\n$_jsonGenFunc\n}\n\n' +
+          "class $modelName extends DataModelClass<$name>{\n" +
+          " $modelName(){ collectionName = '$collectionName';   }\n" +
+          " $name newItem()=>$name();\n" +
+          "}\n";
     }
   }
 }
