@@ -1,6 +1,7 @@
 # JSON to Dart
 
-[![Build Status](https://travis-ci.org/javiercbk/json_to_dart.svg?branch=master)](https://travis-ci.org/javiercbk/json_to_dart)
+
+<a href="https://amarildolacerda.github.io/json_to_dart">Rest Json to Dart</a>
 
 Given a JSON string, this library will generate all the necessary Dart classes to parse and generate JSON.
 
