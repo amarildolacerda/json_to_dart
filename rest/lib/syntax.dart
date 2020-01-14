@@ -331,9 +331,10 @@ class ClassDefinition {
     if (privateFields) {
       return 'class $name extends DataItem {\n$_fieldList\n\n$_defaultPrivateConstructor\n\n$_gettersSetters\n\n$_jsonParseFunc\n\n$_jsonGenFunc\n}\n';
     } else {
-      return "import 'package:controls_data/data_model.dart';\n\n" +
+      return "import 'package:controls_data/data_model.dart';\n" +
+          "import 'package:controls_data/odata_client.dart'; \n\n" +
           'class $name extends DataItem {\n$_fieldList\n\n$_defaultConstructor\n\n$_jsonParseFunc\n\n$_jsonGenFunc\n}\n\n' +
-          "class $modelName extends DataModelClass<$name>{\n" +
+          "class $modelName extends ODataModelClass<$name>{\n" +
           " $modelName(){ collectionName = '$collectionName';   }\n" +
           " $name newItem()=>$name();\n" +
           "}\n";
