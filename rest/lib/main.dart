@@ -43,6 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final _hostController = TextEditingController();
   final _classController = TextEditingController();
   final _textoController = TextEditingController();
+
   @override
   void initState() {
     _hostController.text = host;
@@ -173,7 +174,11 @@ class _MyHomePageState extends State<MyHomePage> {
     _classController.text = camelCase(resource.toLowerCase() + '_' + 'Item');
     var url = Uri.encodeFull(host + resource + '?\$top=1');
     print(url);
-    http.get(url).then((rsp) {
+    http.get(url, headers: {
+      "Authorization":
+          'Bearer eyJjb250YWlkIjoibTUiLCJ1c3VhcmlvIjoiXHUwMDA177+9XCJx3Ynvv73vv73die+/vSIsImRhdGEiOiIyMDIwLTA0LTE4VDEwOjAxOjM0LjI1OFoifQ==',
+      'contaId': 'm5',
+    }).then((rsp) {
       print(rsp.body);
       if (rsp.statusCode == 200) {
         var j = jsonDecode(rsp.body);

@@ -335,7 +335,7 @@ class ClassDefinition {
           "import 'package:controls_data/odata_client.dart'; \n\n" +
           'class $name extends DataItem {\n$_fieldList\n\n$_defaultConstructor\n\n$_jsonParseFunc\n\n$_jsonGenFunc\n}\n\n' +
           "class $modelName extends ODataModelClass<$name>{\n" +
-          " $modelName(){ collectionName = '$collectionName';   }\n" +
+          " $modelName(){ collectionName = '$collectionName';\n super.API = ODataInst();  }\n" +
           " $name newItem()=>$name();\n" +
           "}\n";
     }
