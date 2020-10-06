@@ -108,7 +108,7 @@ class TypeDefinition {
       if (name == "List") {
         return "$fieldKey = json['$key'].cast<$subtype>();";
       }
-      return "$fieldKey = json['$key'];";
+      return "$fieldKey .from(json['$key']);";
     } else if (name == "List" && subtype == "DateTime") {
       return "$fieldKey = json['$key'].map((v) => DateTime.tryParse(v));";
     } else if (name == "DateTime") {
@@ -332,7 +332,8 @@ class ClassDefinition {
       return 'class $name extends DataItem {\n$_fieldList\n\n$_defaultPrivateConstructor\n\n$_gettersSetters\n\n$_jsonParseFunc\n\n$_jsonGenFunc\n}\n';
     } else {
       return "import 'package:controls_data/data_model.dart';\n" +
-          "import 'package:controls_data/odata_client.dart'; \n\n" +
+          "import 'package:controls_data/odata_client.dart'; \n" +
+          "import 'package:controls_extensions/extensions.dart';\n\n" +
           'class $name extends DataItem {\n$_fieldList\n\n$_defaultConstructor\n\n$_jsonParseFunc\n\n$_jsonGenFunc\n}\n\n' +
           "class $modelName extends ODataModelClass<$name>{\n" +
           " $modelName(){ collectionName = '$collectionName';\n super.API = ODataInst();  }\n" +
